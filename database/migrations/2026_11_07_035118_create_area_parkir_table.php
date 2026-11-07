@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('kapasitas');
             $table->integer('terisi');
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

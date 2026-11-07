@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('log_aktivitas', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->string('aktivitas');
             $table->datetime('waktu_aktivitas');
 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

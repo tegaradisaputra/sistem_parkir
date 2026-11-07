@@ -7,16 +7,31 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
+// #[Fillable(['name', 'email', 'password'])]
+// #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role',
+        'status_aktif',
+    ];
+
+
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
     /**
      * Get the attributes that should be cast.
      *
@@ -26,7 +41,18 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'status_aktif' => 'boolean',
             'password' => 'hashed',
         ];
+    }
+
+    public function transaksi(): HasMany
+    {
+        return $this->hasMany(Transaksi::class);
+    }
+
+    public function logAktivitas(): HasMany
+    {
+        return $this->hasMany(LogAktivitas::class);
     }
 }

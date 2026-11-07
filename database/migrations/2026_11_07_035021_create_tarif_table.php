@@ -16,6 +16,8 @@ return new class extends Migration
             $table->enum('jenis_kendaraan', ['motor', 'mobil', 'lainnya']);
             $table->decimal('tarif_per_jam');
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

@@ -18,9 +18,11 @@ return new class extends Migration
             $table->string('warna');
             $table->string('pemilik');
 
-            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
