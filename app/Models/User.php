@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
         'role',
         'status_aktif',
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function logAktivitas(): HasMany
     {
         return $this->hasMany(LogAktivitas::class);
+    }
+
+    public function kendaraan(): HasMany
+    {
+        return $this->hasMany(Kendaraan::class);
     }
 }
